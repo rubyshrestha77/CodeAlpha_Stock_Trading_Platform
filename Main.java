@@ -6,10 +6,10 @@ public class Main {
         Market market = new Market();
         Portfolio portfolio = new Portfolio();
 
-        // Adding some stocks to the market
-        market.addStock("SPL", "Sitapaila Inc.", 150);
-        market.addStock("BAL", "Bafal Inc.", 600);
-        market.addStock("NEP", "Nepal Inc.", 3200);
+        // Adding sample stocks
+        market.addStock("AAPL", "Apple Inc.", 150);
+        market.addStock("TSLA", "Tesla Inc.", 600);
+        market.addStock("AMZN", "Amazon Inc.", 3200);
 
         while (true) {
             System.out.println("\n1. View Market\n2. Buy Stock\n3. Sell Stock\n4. View Portfolio\n5. Update Market Prices\n6. Exit");
@@ -23,9 +23,14 @@ public class Main {
                 case 2:
                     System.out.print("Enter stock symbol to buy: ");
                     String buySymbol = scanner.next().toUpperCase();
-                    System.out.print("Enter quantity: ");
-                    int buyQuantity = scanner.nextInt();
-                    portfolio.buyStock(buySymbol, buyQuantity);
+                    Stock stockToBuy = market.getStock(buySymbol);
+                    if (stockToBuy != null) {
+                        System.out.print("Enter quantity: ");
+                        int buyQuantity = scanner.nextInt();
+                        portfolio.buyStock(buySymbol, stockToBuy.getPrice(), buyQuantity);
+                    } else {
+                        System.out.println("Stock not found.");
+                    }
                     break;
                 case 3:
                     System.out.print("Enter stock symbol to sell: ");
@@ -35,7 +40,7 @@ public class Main {
                     portfolio.sellStock(sellSymbol, sellQuantity);
                     break;
                 case 4:
-                    portfolio.displayPortfolio();
+                    portfolio.displayPortfolio(market);
                     break;
                 case 5:
                     market.updatePrices();

@@ -11,13 +11,13 @@ public class Market {
 
     public void updatePrices() {
         for (Stock stock : stocks.values()) {
-            double change = (random.nextDouble() - 0.5) * 10; // Random price change
-            stock.setPrice(Math.max(1, stock.getPrice() + change)); // Ensure price is > 0
+            double change = (random.nextDouble() - 0.5) * 10;
+            stock.setPrice(Math.max(1, stock.getPrice() + change));
         }
     }
 
     public void displayStocks() {
-        System.out.println("Market Prices:");
+        System.out.println("\nMarket Prices:");
         for (Stock stock : stocks.values()) {
             System.out.println(stock);
         }
@@ -27,4 +27,3 @@ public class Market {
         return stocks.get(symbol);
     }
 }
-

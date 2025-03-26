@@ -27,6 +27,6 @@ public class Stock {
 
     @Override
     public String toString() {
-        return symbol + " (" + name + ") - $" + price;
+        return symbol + " (" + name + ") - $" + String.format("%.2f", price);
     }
 }
